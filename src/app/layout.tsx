@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import QueryProvider from "@/providers/QueryProvider";
 import Navbar from "@/components/Navbar";
 import Ticker from "@/components/Ticker";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const hind = Hind_Siliguri({
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Navbar />
           <Ticker />
           <main className="flex-1">{children}</main>
+          <Footer />
           <Toaster
             position="top-center"
             toastOptions={{
