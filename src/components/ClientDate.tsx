@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { banglaDate } from "@/lib/bn";
 
-export default function ClientDate({ className }: { className?: string }) {
-  const [text, setText] = useState("");
+const subscribe = () => () => {};
+const getSnapshot = () => banglaDate();
+const getServerSnapshot = () => "";
 
-  useEffect(() => {
-    setText(banglaDate());
-  }, []);
+export default function ClientDate({ className }: { className?: string }) {
+  const text = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return (
     <span className={className} suppressHydrationWarning>
