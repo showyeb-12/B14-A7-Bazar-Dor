@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+import QueryProvider from "@/providers/QueryProvider";
 import "./globals.css";
 
 const hind = Hind_Siliguri({
@@ -28,7 +30,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="bn" data-theme="bazardor" className={`${hind.variable} h-full`}>
-      <body className="min-h-full antialiased">{children}</body>
+      <body className="min-h-full antialiased">
+        <QueryProvider>
+          {children}
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 3500,
+              style: {
+                fontFamily: "var(--font-sans)",
+                borderRadius: "0.75rem",
+              },
+            }}
+          />
+        </QueryProvider>
+      </body>
     </html>
   );
 }
