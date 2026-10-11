@@ -6,17 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "auth:migrate": "auth migrate"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.104.1",
+    "better-auth": "^1.7.7",
+    "better-sqlite3": "^13.0.3",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-hot-toast": "^2.6.1"
   },
   "devDependencies": {
+    "@better-auth/cli": "^1.4.22",
     "@tailwindcss/turbopack": "^4",
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

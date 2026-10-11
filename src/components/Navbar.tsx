@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "@/lib/api";
 import ClientDate from "@/components/ClientDate";
+import AuthButtons from "@/components/auth/AuthButtons";
 
 function navLinkClass(active: boolean) {
   return [
@@ -85,14 +86,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="flex items-center gap-1.5 sm:gap-2">
-          <Link href="/signin" className="btn btn-ghost btn-sm sm:btn-md">
-            সাইন ইন
-          </Link>
-          <Link href="/signup" className="btn btn-primary btn-sm sm:btn-md">
-            সাইন আপ
-          </Link>
-        </nav>
+        <AuthButtons />
       </div>
 
       <div className="border-t border-base-300/70 bg-base-100/70">
