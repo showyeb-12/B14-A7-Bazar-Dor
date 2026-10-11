@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -15,13 +16,60 @@ function navLinkClass(active: boolean) {
   ].join(" ");
 }
 
-export default function Navbar() {
+function CategoryNavSkeleton() {
+  return (
+    <div className="mx-auto flex max-w-6xl items-center gap-1.5 overflow-hidden px-4 py-2">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <span
+          key={index}
+          className="skeleton h-7 w-16 shrink-0 rounded-full"
+        />
+      ))}
+    </div>
+  );
+}
+
+function CategoryNav() {
   const pathname = usePathname();
   const { data: categories, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: ({ signal }) => getCategories(signal),
   });
 
+  return (
+    <nav className="mx-auto flex max-w-6xl items-center gap-1.5 overflow-x-auto px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <Link href="/" className={navLinkClass(pathname === "/")}>
+        হোম
+      </Link>
+
+      {isLoading &&
+        Array.from({ length: 6 }).map((_, index) => (
+          <span
+            key={index}
+            className="skeleton h-7 w-16 shrink-0 rounded-full"
+          />
+        ))}
+
+      {categories?.map((category) => {
+        const href = `/category/${category.slug}`;
+        return (
+          <Link
+            key={category.slug}
+            href={href}
+            className={navLinkClass(pathname === href)}
+          >
+            <span aria-hidden className="mr-1">
+              {category.icon}
+            </span>
+            {category.nameBn}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+
+export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-base-300 bg-base-100/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2.5">
@@ -48,35 +96,9 @@ export default function Navbar() {
       </div>
 
       <div className="border-t border-base-300/70 bg-base-100/70">
-        <nav className="mx-auto flex max-w-6xl items-center gap-1.5 overflow-x-auto px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <Link href="/" className={navLinkClass(pathname === "/")}>
-            হোম
-          </Link>
-
-          {isLoading &&
-            Array.from({ length: 6 }).map((_, index) => (
-              <span
-                key={index}
-                className="skeleton h-7 w-16 shrink-0 rounded-full"
-              />
-            ))}
-
-          {categories?.map((category) => {
-            const href = `/category/${category.slug}`;
-            return (
-              <Link
-                key={category.slug}
-                href={href}
-                className={navLinkClass(pathname === href)}
-              >
-                <span aria-hidden className="mr-1">
-                  {category.icon}
-                </span>
-                {category.nameBn}
-              </Link>
-            );
-          })}
-        </nav>
+        <Suspense fallback={<CategoryNavSkeleton />}>
+          <CategoryNav />
+        </Suspense>
       </div>
     </header>
   );
