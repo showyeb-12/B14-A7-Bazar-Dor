@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "@/providers/QueryProvider";
+import Navbar from "@/components/Navbar";
+import Ticker from "@/components/Ticker";
 import "./globals.css";
 
 const hind = Hind_Siliguri({
@@ -30,9 +32,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="bn" data-theme="bazardor" className={`${hind.variable} h-full`}>
-      <body className="min-h-full antialiased">
+      <body className="flex min-h-full flex-col antialiased">
         <QueryProvider>
-          {children}
+          <Navbar />
+          <Ticker />
+          <main className="flex-1">{children}</main>
           <Toaster
             position="top-center"
             toastOptions={{
