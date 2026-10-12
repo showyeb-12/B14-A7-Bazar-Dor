@@ -124,7 +124,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
             </div>
           </div>
 
-          <div className="shrink-0 rounded-2xl bg-primary/10 px-5 py-4 text-center">
+          <div className="w-full shrink-0 rounded-2xl bg-primary/10 px-5 py-4 text-center sm:w-auto">
             <p className="text-xs font-medium text-base-content/60">
               আজকের দাম
             </p>

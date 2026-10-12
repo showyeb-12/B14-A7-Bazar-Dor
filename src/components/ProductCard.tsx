@@ -8,10 +8,10 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="card group relative overflow-hidden rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      className="card group relative overflow-hidden rounded-2xl border border-base-300 bg-base-100 p-3 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4"
     >
       <div className="flex items-start justify-between gap-2">
-        <span className="text-4xl leading-none" aria-hidden>
+        <span className="text-3xl leading-none sm:text-4xl" aria-hidden>
           {product.image}
         </span>
         <span
