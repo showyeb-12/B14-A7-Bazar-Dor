@@ -55,14 +55,14 @@ export default function Hero() {
           </dl>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-none">
+        <div className="relative mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-md">
           <Image
-            src="/hero-market.svg"
+            src="/bazar-hero.png"
             alt="কাঁচাবাজারের ঝুড়িতে চাল, মাছ, সবজি ও মাংস"
-            width={640}
-            height={480}
+            width={315}
+            height={263}
             priority
-            className="h-auto w-full drop-shadow-xl"
+            className="h-auto w-full object-contain drop-shadow-xl"
           />
         </div>
       </div>
